@@ -1,3 +1,3 @@
-# leetcode
+# LeetCode
 
-coding training by using leet code.
+coding training by using LeetCode.
