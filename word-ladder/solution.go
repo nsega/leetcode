@@ -16,9 +16,7 @@ func ladderLength(beginWord string, endWord string, wordList []string) int {
 		for i := 0; i < qlen; i++ {
 			word := que[0]
 			que = que[1:]
-
-			candidates := candidates(word)
-			for _, c := range candidates {
+			for _, c := range candidates(word) {
 				if _, ok := wm[c]; ok {
 					if c == endWord {
 						return depth + 1
