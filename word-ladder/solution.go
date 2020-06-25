@@ -5,48 +5,56 @@ import (
 )
 
 func ladderLength(beginWord string, endWord string, wordList []string) int {
-	m := make(map[string]bool)
-	for _, v := range wordList {
-		m[v] = true
-	}
 
-	var list []string
-	list = append(list, beginWord)
+	wm := wordMap(wordList, beginWord)
+	que := []string{beginWord}
+	depth := 0
+	for len(que) > 0 {
+		depth++
 
-	res := 1
-	for len(list) != 0 {
-		l := len(list)
-		for i := 0; i < l; i++ {
-			word := list[0]
-			list = list[1:]
-			if word == endWord {
-				return res
+		qlen := len(que)
+		for i := 0; i < qlen; i++ {
+			word := que[0]
+			que = que[1:]
+
+			candidates := candidates(word)
+			for _, c := range candidates {
+				if _, ok := wm[c]; ok {
+					if c == endWord {
+						return depth + 1
+					}
+
+					delete(wm, c)
+					que = append(que, c)
+				}
 			}
-			list = findWord(word, m, list)
 		}
-		res++
 	}
 	return 0
 }
 
-func findWord(word string, m map[string]bool, l []string) []string {
-	m[word] = false
-	for ch := range word {
-		for j := 0; j < 26; j++ {
-			tmp := []rune(word)
-			tmp[ch] = rune('a' + j)
-			str := string(tmp)
-			if _, ok := m[str]; ok {
-				if len(l) != 0 && str != l[len(l)-1] {
-					l = append(l, str)
-				}
-				if len(l) == 0 {
-					l = append(l, str)
-				}
+func wordMap(wordList []string, beginWord string) map[string]int {
+	wm := make(map[string]int)
+	for i, word := range wordList {
+		if _, ok := wm[word]; !ok {
+			if word != beginWord {
+				wm[word] = i
 			}
 		}
 	}
-	return l
+	return wm
+}
+
+func candidates(word string) []string {
+	res := []string{}
+	for i := 0; i < 26; i++ {
+		for j := 0; j < len(word); j++ {
+			if word[j] != byte(int('a')+i) {
+				res = append(res, word[:j]+string(int('a')+i)+word[j+1:])
+			}
+		}
+	}
+	return res
 }
 
 func main() {
