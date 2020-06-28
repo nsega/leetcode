@@ -59,40 +59,16 @@ func maxDepth(root *TreeNode) int {
 	if root == nil {
 		return 0
 	}
-
-	// breadth first search of the whole tree.
-	que := []*TreeNode{root}
-	depth := 1
-	start, end := 0, 1
-
-	for {
-		numOfChildren := 0
-		for i := start; i < end; i++ {
-			node := que[i]
-
-			if node.Left != nil {
-				que = append(que, node.Left)
-				numOfChildren++
-			}
-
-			if node.Right != nil {
-				que = append(que, node.Right)
-				numOfChildren++
-			}
-		}
-		if numOfChildren == 0 {
-			break
-		}
-
-		depth++
-		start = end
-		end = end + numOfChildren
+	leftDepth := maxDepth(root.Left)
+	rightDepth := maxDepth(root.Right)
+	if leftDepth > rightDepth {
+		return leftDepth + 1
+	} else {
+		return rightDepth + 1
 	}
-	return depth
 }
 
 func main() {
-
 	tree := &BinaryTree{}
 	tree.insert(9).insert(3).insert(20).insert(15).insert(7)
 	fmt.Println(maxDepth(tree.root))
