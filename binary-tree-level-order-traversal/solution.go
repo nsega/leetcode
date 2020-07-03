@@ -21,7 +21,6 @@ func bfs(root *TreeNode) [][]int {
 	var ret [][]int
 	var queue []*TreeNode
 	queue = append(queue, root)
-
 	for len(queue) > 0 {
 		currentLength := len(queue)
 		var tmp []int
