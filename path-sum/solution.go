@@ -76,6 +76,6 @@ func main() {
 	sum := 22
 
 	print(root, 0, 'M')
-	fmt.Println("sum", sum)
-	fmt.Println(hasPathSum(root, sum))
+	fmt.Println("sum:", sum)
+	fmt.Println("output:", hasPathSum(root, sum))
 }
