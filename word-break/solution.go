@@ -31,16 +31,16 @@ func workBreak(s string, wordDict []string) bool {
 		dict[ch] = true
 	}
 
-	mem := make([]bool, len(s)+1)
-	mem[0] = true
+	memo := make([]bool, len(s)+1)
+	memo[0] = true
 
-	for i := 0; i < len(mem); i++ {
+	for i := 0; i <= len(s); i++ {
 		for j := i - 1; j >= 0; j-- {
-			if mem[j] && dict[s[j:i]] {
-				mem[i] = true
+			if memo[j] && dict[s[j:i]] {
+				memo[i] = true
 				break
 			}
 		}
 	}
-	return mem[len(s)]
+	return memo[len(s)]
 }
