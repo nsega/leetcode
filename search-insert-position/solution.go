@@ -1,9 +1,8 @@
 package main
 
 import (
-	"sort"
-
 	"fmt"
+	"sort"
 )
 
 func main() {
