@@ -22,20 +22,20 @@ func permute(nums []int) [][]int {
 	if len(nums) == 0 {
 		return nil
 	}
-	ret := make([][]int, 0)
-	backtrack(nums, nil, &ret)
-	return ret
+	result := make([][]int, 0)
+	backtrack(nums, nil, &result)
+	return result
 }
 
-func backtrack(nums []int, prev []int, ret *[][]int) {
+func backtrack(nums []int, prev []int, result *[][]int) {
 	if len(nums) == 0 {
-		*ret = append(*ret, append([]int{}, prev...))
+		*result = append(*result, append([]int{}, prev...))
 		return
 	}
 	for i := 0; i < len(nums); i++ {
 		backtrack(
 			append(append([]int{}, nums[0:i]...), nums[i+1:]...),
 			append(prev, nums[i]),
-			ret)
+			result)
 	}
 }
