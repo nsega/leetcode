@@ -33,8 +33,9 @@ func backtrack(nums []int, prev []int, result *[][]int) {
 		return
 	}
 	for i := 0; i < len(nums); i++ {
+		base := append([]int{}, nums[0:i]...)
 		backtrack(
-			append(append([]int{}, nums[0:i]...), nums[i+1:]...),
+			append(base, nums[i+1:]...),
 			append(prev, nums[i]),
 			result)
 	}
