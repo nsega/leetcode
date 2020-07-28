@@ -28,18 +28,17 @@ func main() {
 	fmt.Println("  Expected output: ", exp)
 	fmt.Println("  Actual output: ", canAttendMeetings(nums))
 
-	nums := [][]int{
+	nums = [][]int{
 		{7,10},{2,4},
 	}
-	exp := true
+	exp = true
 	fmt.Println("Example 1:")
 	fmt.Printf("  Input: n = %v\n", nums)
 	fmt.Println("  Expected output: ", exp)
 	fmt.Println("  Actual output: ", canAttendMeetings(nums))
-
 }
 
-func canAttendMeetings(intervals [[]int) bool {
+func canAttendMeetings(intervals [][]int) bool {
 	arr := Array(intervals)
 	sort.Sort(&arr)
 	for i:=0; i < len(arr)-1; i++ {
