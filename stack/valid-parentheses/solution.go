@@ -1,15 +1,17 @@
-var brancketesMatcher = map[rune]rune {
-	'(' : ')',
-	'{' : '}',
-	'[' : ']',
+package main
+
+var brancketesMatcher = map[rune]rune{
+	'(': ')',
+	'{': '}',
+	'[': ']',
 }
 
-func isValid(s string) bool {}	
+func isValid(s string) bool {
 	stack := make([]rune, 0)
-	for i, ch := range s {
+	for _, ch := range s {
 		closer, ok := brancketesMatcher[ch]
 		if ok {
-			stack = apeend(stack, closer)
+			stack = append(stack, closer)
 		} else if len(stack) > 0 && ch == stack[len(stack)-1] {
 			stack = stack[:len(stack)-1]
 		} else {
