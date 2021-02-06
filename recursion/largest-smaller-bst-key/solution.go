@@ -11,7 +11,7 @@ type Node struct {
 
 func FindLargestSmallerKey(rootNode *Node, num int) int {
 	// your code goes here
-	if num == 0 {
+	if num == 0 || rootNode == nil {
 		return -1
 	}
 
