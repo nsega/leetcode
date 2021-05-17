@@ -1,6 +1,6 @@
 package main
 
-var brancketesMatcher = map[rune]rune{
+var bracketsMatcher = map[rune]rune{
 	'(': ')',
 	'{': '}',
 	'[': ']',
@@ -9,7 +9,7 @@ var brancketesMatcher = map[rune]rune{
 func isValid(s string) bool {
 	stack := make([]rune, 0)
 	for _, ch := range s {
-		closer, ok := brancketesMatcher[ch]
+		closer, ok := bracketsMatcher[ch]
 		if ok {
 			stack = append(stack, closer)
 		} else if len(stack) > 0 && ch == stack[len(stack)-1] {
