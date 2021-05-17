@@ -36,7 +36,7 @@ func isValidBST(root *TreeNode) bool {
 	return true
 }
 
-func print(node *TreeNode, ns int, ch rune) {
+func printNode(node *TreeNode, ns int, ch rune) {
 	if node == nil {
 		return
 	}
@@ -45,8 +45,8 @@ func print(node *TreeNode, ns int, ch rune) {
 		fmt.Printf(" ")
 	}
 	fmt.Printf("%c:%v\n", ch, node.Val)
-	print(node.Left, ns+2, 'L')
-	print(node.Right, ns+2, 'R')
+	printNode(node.Left, ns+2, 'L')
+	printNode(node.Right, ns+2, 'R')
 }
 
 func main() {
@@ -64,7 +64,7 @@ func main() {
 			Right: nil,
 		},
 	}
-	print(root, 0, 'M')
+	printNode(root, 0, 'M')
 	fmt.Println("output:", isValidBST(root))
 
 	fmt.Println("Example2")
@@ -89,6 +89,6 @@ func main() {
 			},
 		},
 	}
-	print(root, 0, 'M')
+	printNode(root, 0, 'M')
 	fmt.Println("output:", isValidBST(root))
 }
