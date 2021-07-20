@@ -51,40 +51,36 @@ func main() {
 }
 
 func makeListNode(vals []int, pos int) *ListNode {
-	head := &ListNode{
-		Val:  vals[0],
-		Next: nil,
+	list := &ListNode{Val: vals[0], Next: nil}
+	for _, v := range vals[1:] {
+		list.append(v)
 	}
-	lastNode := &ListNode{}
-	for val := range vals[1:] {
-		tmp := head
-		for tmp.Next != nil {
-			tmp = tmp.Next
-		}
-		tmp.Next = &ListNode{
-			Val:  val,
-			Next: nil,
-		}
-		lastNode = tmp.Next
+
+	tmp := list
+	for tmp.Next != nil {
+		tmp = tmp.Next
 	}
-	if pos != -1 {
-		lastNode.Next = node(head, pos)
-	}
-	return head
+	lastNode := tmp
+	lastNode.Next = node(list, pos)
+
+	return list
 }
 
 func node(ln *ListNode, pos int) *ListNode {
-	p := 0
-	ptr := ln
-	for p < pos {
-		ptr = ptr.Next
-		p += 1
+	if pos != -1 {
+		p := 0
+		ptr := ln
+		for p < pos {
+			ptr = ptr.Next
+			p += 1
+		}
+		return ptr
 	}
-	return ptr
+	return nil
 }
 
 // Append adds an Item to the end of the linked list
-func (l *ListNode) Append(v int) {
+func (l *ListNode) append(v int) {
 	node := ListNode{Val: v, Next: nil}
 	if l.Next == nil {
 		l.Next = &node

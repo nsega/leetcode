@@ -91,10 +91,10 @@ func index(vals []int, val int) int {
 	return idx
 }
 
-func node(head *ListNode, pos int) *ListNode {
+func node(ln *ListNode, pos int) *ListNode {
 	if pos != -1 {
 		p := 0
-		ptr := head
+		ptr := ln
 		for p < pos {
 			ptr = ptr.Next
 			p += 1
