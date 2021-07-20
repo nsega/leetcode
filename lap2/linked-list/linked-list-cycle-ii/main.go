@@ -68,7 +68,7 @@ func main() {
 func makeLinkedList(vals []int, pos int) *ListNode {
 	list := &ListNode{Val: vals[0], Next: nil}
 	for _, v := range vals[1:] {
-		list.Append(v)
+		list.append(v)
 	}
 
 	tmp := list
@@ -104,8 +104,8 @@ func node(head *ListNode, pos int) *ListNode {
 	return nil
 }
 
-// Append adds an Item to the end of the linked list
-func (l *ListNode) Append(v int) {
+// append adds an Item to the end of the linked list
+func (l *ListNode) append(v int) {
 	node := ListNode{Val: v, Next: nil}
 	if l.Next == nil {
 		l.Next = &node

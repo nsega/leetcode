@@ -4,8 +4,8 @@ import "fmt"
 
 // ListNode is definition for singly-linked list.
 type ListNode struct {
-   Val int
-   Next *ListNode
+	Val  int
+	Next *ListNode
 }
 
 func hasCycle(head *ListNode) bool {
@@ -23,7 +23,7 @@ func hasCycle(head *ListNode) bool {
 
 func main() {
 	// Explanation: There is a cycle in the linked list, where the tail connects to the 1st node (0-indexed).
-	vals := []int{3,2,0,4}
+	vals := []int{3, 2, 0, 4}
 	pos := 1
 	head := makeListNode(vals, pos)
 	fmt.Println("Example 1:")
@@ -32,7 +32,7 @@ func main() {
 	fmt.Println("  Actual output:   ", hasCycle(head))
 
 	// Explanation: There is a cycle in the linked list, where the tail connects to the 0th node.
-	vals = []int{1,2}
+	vals = []int{1, 2}
 	pos = 0
 	head = makeListNode(vals, pos)
 	fmt.Println("Example 2:")
@@ -50,9 +50,9 @@ func main() {
 	fmt.Println("  Actual output:   ", hasCycle(head))
 }
 
-func makeListNode(vals []int, pos int) *ListNode{
+func makeListNode(vals []int, pos int) *ListNode {
 	head := &ListNode{
-		Val: vals[0],
+		Val:  vals[0],
 		Next: nil,
 	}
 	lastNode := &ListNode{}
@@ -81,4 +81,21 @@ func node(ln *ListNode, pos int) *ListNode {
 		p += 1
 	}
 	return ptr
+}
+
+// Append adds an Item to the end of the linked list
+func (l *ListNode) Append(v int) {
+	node := ListNode{Val: v, Next: nil}
+	if l.Next == nil {
+		l.Next = &node
+	} else {
+		last := l.Next
+		for {
+			if last.Next == nil {
+				break
+			}
+			last = last.Next
+		}
+		last.Next = &node
+	}
 }
