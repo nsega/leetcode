@@ -28,18 +28,19 @@ func main() {
 	head := makeListNode(vals)
 	fmt.Println("Example 1:")
 	fmt.Printf("  Input: head = %v\n", vals)
-	fmt.Println("  Expected output:", exp)
-	fmt.Println("  Actual output:", deleteDuplicates(head).array())
+	fmt.Println("  Expected:", exp)
+	fmt.Println("  Output:", deleteDuplicates(head).array())
 
 	vals = []int{1, 1, 2, 3, 3}
 	exp = []int{1, 2, 3}
 	head = makeListNode(vals)
 	fmt.Println("Example 2:")
 	fmt.Printf("  Input: head = %v\n", vals)
-	fmt.Println("  Expected output:", exp)
-	fmt.Println("  Actual output:", deleteDuplicates(head).array())
+	fmt.Println("  Expected:", exp)
+	fmt.Println("  Output:", deleteDuplicates(head).array())
 }
 
+// makeListNode makes ListNode with int array
 func makeListNode(vals []int) *ListNode {
 	list := &ListNode{Val: vals[0], Next: nil}
 	for _, v := range vals[1:] {
@@ -48,7 +49,7 @@ func makeListNode(vals []int) *ListNode {
 	return list
 }
 
-// append adds an Item to the end of the linked list
+// append adds an Item to the end of the ListNode
 func (l *ListNode) append(v int) {
 	node := ListNode{Val: v, Next: nil}
 	if l.Next == nil {
@@ -65,6 +66,7 @@ func (l *ListNode) append(v int) {
 	}
 }
 
+// array returns int array from the ListNode
 func (l *ListNode) array() []int {
 	var arr []int
 	for n := l; n != nil; n = n.Next {
@@ -73,6 +75,7 @@ func (l *ListNode) array() []int {
 	return arr
 }
 
+// printListNode prints values from the ListNode
 func (l *ListNode) printListNode() {
 	ln := l
 	for ln != nil {
