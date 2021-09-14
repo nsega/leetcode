@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"container/list"
+	"fmt"
+)
 
 type TreeNode struct {
 	Val   int
@@ -30,16 +33,27 @@ func main() {
 		arg  args
 		exp  int
 	}
-	tree := &BinaryTree{}
-	// FIXME: convert Tree from int array.
-	tree.insert(9).insert(3).insert(20).insert(15).insert(7)
 	tests := []test{
 		{
 			name: "Example 1:",
 			arg: args{
-				tree.root,
+				arrayToBinaryTree([]int{3, 9, 20, 0, 0, 15, 7}),
 			},
 			exp: 3,
+		},
+		{
+			name: "Example 2:",
+			arg: args{
+				arrayToBinaryTree([]int{1, 0, 2}),
+			},
+			exp: 2,
+		},
+		{
+			name: "Example 3:",
+			arg: args{
+				arrayToBinaryTree([]int{}),
+			},
+			exp: 0,
 		},
 	}
 	for _, tt := range tests {
@@ -50,35 +64,29 @@ func main() {
 	}
 }
 
-type BinaryTree struct {
-	root *TreeNode
-}
-
-func (t *BinaryTree) insert(val int) *BinaryTree {
-	if t.root == nil {
-		t.root = &TreeNode{Val: val, Left: nil, Right: nil}
-	} else {
-		t.root.insert(val)
+func arrayToBinaryTree(tree []int) *TreeNode {
+	if len(tree) == 0 {
+		return nil
 	}
-	return t
-}
-
-func (n *TreeNode) insert(val int) {
-	if n == nil {
-		return
-	} else if val <= n.Val {
-		if n.Left == nil {
-			n.Left = &TreeNode{Val: val, Left: nil, Right: nil}
-		} else {
-			n.Left.insert(val)
-		}
-	} else {
-		if n.Right == nil {
-			n.Right = &TreeNode{Val: val, Left: nil, Right: nil}
-		} else {
-			n.Right.insert(val)
+	root := &TreeNode{Val: tree[0], Left: nil, Right: nil}
+	l := list.New()
+	l.PushFront(root)
+	for i := 1; i < len(tree); i++ {
+		node := l.Front().Value.(*TreeNode)
+		if node.Left == nil {
+			node.Left = &TreeNode{Val: tree[i], Left: nil, Right: nil}
+			if tree[i] > 0 {
+				l.PushBack(node.Left)
+			}
+		} else if node.Right == nil {
+			node.Right = &TreeNode{Val: tree[i], Left: nil, Right: nil}
+			if tree[i] > 0 {
+				l.PushBack(node.Right)
+			}
+			l.Remove(l.Front())
 		}
 	}
+	return root
 }
 
 func print(node *TreeNode, ns int, ch rune) {
