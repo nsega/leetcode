@@ -70,18 +70,22 @@ func arrayToBinaryTree(tree []int) *TreeNode {
 	}
 	root := &TreeNode{Val: tree[0], Left: nil, Right: nil}
 	l := list.New()
-	l.PushFront(root)
+	l.PushBack(root)
 	for i := 1; i < len(tree); i++ {
 		node := l.Front().Value.(*TreeNode)
-		if node.Left == nil {
-			node.Left = &TreeNode{Val: tree[i], Left: nil, Right: nil}
+		if ((i + 1) % 2) == 0 {
 			if tree[i] > 0 {
+				node.Left = &TreeNode{Val: tree[i], Left: nil, Right: nil}
 				l.PushBack(node.Left)
+			} else {
+				node.Left = nil
 			}
-		} else if node.Right == nil {
-			node.Right = &TreeNode{Val: tree[i], Left: nil, Right: nil}
+		} else if ((i + 1) % 2) == 1 {
 			if tree[i] > 0 {
+				node.Right = &TreeNode{Val: tree[i], Left: nil, Right: nil}
 				l.PushBack(node.Right)
+			} else {
+				node.Right = nil
 			}
 			l.Remove(l.Front())
 		}
